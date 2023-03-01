@@ -6,12 +6,17 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "esModuleInterop": true,
-    "module": "CommonJS",
+    "module": "commonjs",
     "rootDirs": [
         "src",
         "tests"
     ],
     "baseUrl": "src",
+    "paths": {
+      "../*": [
+        "*"
+      ]
+    },
     "plugins": [
       {
         "transform": "typescript-transform-paths"
