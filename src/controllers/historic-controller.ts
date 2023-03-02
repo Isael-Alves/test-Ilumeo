@@ -23,10 +23,14 @@ export async function listHistoricTimes(req: Request, res: Response) {
 export async function postNewPoint(req: Request, res: Response) {
   try {
     const { body }  = req;
+    console.log(body);
+    if(!body) {
+      throw notFoundError();
+    }
 
     await historicService.postNewPointHistoric(body);
 
-    return res.status(201);
+    return res.sendStatus(201);
   } catch (error) {
     if(error.name === "BadRequestError") {
       return res.sendStatus(400);

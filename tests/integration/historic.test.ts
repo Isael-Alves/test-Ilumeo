@@ -60,7 +60,7 @@ describe("GET /historic/:code", () => {
 });
 
 describe("POST /historic", () => {
-  it("should respond with status 200 if if user successfully created", async () => {
+  it("should respond with status 201 if if user successfully created", async () => {
     const user = await createUser();
     const body = {
       startTime: "2023-03-01T08:30:00.000Z",
@@ -68,28 +68,30 @@ describe("POST /historic", () => {
       codeUser: user.code
     };
 
-    const response = await (await server.post("/historic")).body(body);
+    const response = await server.post("/historic").send(body);
 
     expect(response.status).toBe(201);
   });
 
-  it("should respond with status 200 se der certo, mas retornar um array vazio", async () => {
+  it("should respond with status 400 when the body is invalid ", async () => {
     const user = await createUser();
-
-    const response = await server.post(`/historic/${user.code}`);
-
-    expect(response.status).toBe(200);
-    expect(response.body).toEqual([]);
-  });
-
-  it("should respond with status 404 if code is underfined", async () => {
-    const response = await server.post("/historic");
+    const body = {
+      startTime: "2023-03-01T08:30:00.000Z",
+      finishTime: 2,
+      codeUser: user.code
+    };
+    const response = await server.post("/historic").send(body);
     
-    expect(response.status).toBe(404);
+    expect(response.status).toBe(400);
   });
 
-  it("should respond with status 401 if user not found", async () => {
-    const response = await server.post("/historic");
+  it("should respond with status 400 when the body is invalid ", async () => {
+    const body = {
+      startTime: "2023-03-01T08:30:00.000Z",
+      finishTime: "2023-03-01T17:30:00.000Z",
+      codeUser: "use2ts"
+    };
+    const response = await server.post("/historic").send(body);
     
     expect(response.status).toBe(401);
   });
