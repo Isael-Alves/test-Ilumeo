@@ -23,7 +23,6 @@ export async function listHistoricTimes(req: Request, res: Response) {
 export async function postNewPoint(req: Request, res: Response) {
   try {
     const { body }  = req;
-    console.log(body);
     if(!body) {
       throw notFoundError();
     }

@@ -12,6 +12,7 @@ async function findHistoricByUserCode(code: string): Promise<Historic[]> {
 async function createdNewPoint(body: Partial<Historic>) {
   return prisma.historic.create({
     data: {
+      Date: body.Date,
       startTime: body.startTime,
       finishTime: body.finishTime,
       codeUser: body.codeUser

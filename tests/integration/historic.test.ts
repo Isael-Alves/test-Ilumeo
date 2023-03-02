@@ -30,6 +30,7 @@ describe("GET /historic/:code", () => {
     expect(response.body).toEqual(expect.arrayContaining([
       {
         id: expect.any(Number),
+        Date: expect.any(String),
         codeUser: expect.any(String),
         startTime: expect.any(String),
         finishTime: expect.any(String)
@@ -63,6 +64,7 @@ describe("POST /historic", () => {
   it("should respond with status 201 if if user successfully created", async () => {
     const user = await createUser();
     const body = {
+      Date: "2023-03-01T08:30:00.000Z",
       startTime: "2023-03-01T08:30:00.000Z",
       finishTime: "2023-03-01T17:30:00.000Z",
       codeUser: user.code
@@ -85,8 +87,9 @@ describe("POST /historic", () => {
     expect(response.status).toBe(400);
   });
 
-  it("should respond with status 400 when the body is invalid ", async () => {
+  it("should respond with status 401 when the body is invalid ", async () => {
     const body = {
+      Date: "2023-03-01T08:30:00.000Z",
       startTime: "2023-03-01T08:30:00.000Z",
       finishTime: "2023-03-01T17:30:00.000Z",
       codeUser: "use2ts"

@@ -19,8 +19,9 @@ model User {
 
 model Historic {
   id         Int      @id @default(autoincrement())
-  startTime  DateTime @db.Date
-  finishTime DateTime @db.Date
+  Date       DateTime @db.Timestamp(4)
+  startTime  DateTime @db.Time(4)
+  finishTime DateTime @db.Time(4)
   codeUser   String
   User       User     @relation(fields: [codeUser], references: [code])
 }
