@@ -8,6 +8,8 @@ RUN npm install
 
 COPY . .
 
+RUN npm run build
+
 ENV PORT=4002
 
 EXPOSE 4002
