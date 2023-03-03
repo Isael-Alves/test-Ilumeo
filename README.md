@@ -14,6 +14,8 @@ Basically an electronic point.
 1. Clone this repository
 2. rodar o comando "docker compose up"
 
+user with the code '2xsso9' is created. Use this code to login.
+
 ## How to run for development 
 
 1. Clone this repository
