@@ -7,6 +7,8 @@
     "prebuild": "rm -rf dist",
     "build": "ttsc -p tsconfig.build.json",
     "start": "node dist/src/server.js",
+    "seed": "node dist/prisma/seed.js",
+    "start:app": "npm run migration:run && npm run migration:generate && npm run build && npm run seed && npm start ",
     "migration:run": "prisma migrate deploy",
     "migration:generate": "npm run dev:load-envs prisma migrate dev",
     "test": "NODE_ENV=test jest --passWithNoTests --runInBand",

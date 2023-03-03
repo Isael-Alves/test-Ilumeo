@@ -8,10 +8,4 @@ RUN npm install
 
 COPY . .
 
-RUN npm run build
-
-ENV PORT=4002
-
-EXPOSE 4002
-
-CMD ["npm", "start"]
+CMD ["npm", "run", "start:app"]

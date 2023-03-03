@@ -1,21 +1,23 @@
-ervices:
-  db:
-    image: ilumeoDB
-    environment:
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_USER: postgres
-      POSTGRES_DB: ilumeo
-    volumes:
-      - ./data:/var/lib/postgresql
-
-  app:
-    build: .
+version: "3.9" # optional since v1.27.0
+services:
+  database:
+    container_name: ilumeo-database
+    image: postgres:13-alpine
     ports:
-      - '3000:3000'
-    depends_on:
-      - db
+      - ${POSTGRES_PORT}:${POSTGRES_PORT}
     environment:
-      DB_HOST: db
-      DB_USER: usuario
-      DB_PASSWORD: senha
-      DB_NAME: banco
+      POSTGRES_USER: ${POSTGRES_USERNAME}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DATABASE}
+    command: postgres -p ${POSTGRES_PORT}
+    volumes:
+      - ./database:/var/lib/postgresql/data
+  api:
+    container_name: ilumeo-api
+    build: .
+    env_file:
+      - .env
+    ports:
+      - ${PORT}:${PORT}
+    depends_on:
+      - database

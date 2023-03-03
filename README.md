@@ -9,7 +9,12 @@ Back-end for Ilumeo-Point, a solution to mark the points of the employees.
 Ilumeo-Point is a web browser application with which you can schedule your daily work time, view your work history and which user works has control of the user's work time.
 Basically an electronic point.
 
-## How to run for development
+## How to run for development with docker
+
+1. Clone this repository
+2. rodar o comando "docker compose up"
+
+## How to run for development 
 
 1. Clone this repository
 2. Install all dependencies
@@ -38,6 +43,7 @@ After running the 'seed', a user with the code '2xsso9' is created. Use this cod
 ```bash
 npm run dev
 ```
+
 
 ## How to run tests
 
