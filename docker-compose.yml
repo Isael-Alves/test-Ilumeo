@@ -1,0 +1,21 @@
+ervices:
+  db:
+    image: ilumeoDB
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: ilumeo
+    volumes:
+      - ./data:/var/lib/postgresql
+
+  app:
+    build: .
+    ports:
+      - '3000:3000'
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_USER: usuario
+      DB_PASSWORD: senha
+      DB_NAME: banco

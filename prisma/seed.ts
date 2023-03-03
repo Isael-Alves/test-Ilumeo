@@ -2,6 +2,13 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 async function main() {
+    const user = await prisma.user.create({
+        data: {
+            name: "fulano",
+            code: "2xsso9"
+        } 
+    });
+
     const event = [ 
         await prisma.historic.create({
         data: {
@@ -29,7 +36,7 @@ async function main() {
         })
     ]
 
-    console.log({ event });
+    console.log({ event, user });
 }
 
 main()
